@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600" role="img" aria-label="No cover available">
+  <defs>
+    <pattern id="dots" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(20)">
+      <circle cx="2" cy="2" r="1.4" fill="#D52C16" opacity="0.16"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="600" fill="#2f2f2f"/>
+  <rect width="400" height="600" fill="url(#dots)"/>
+  <g transform="translate(200,300)" fill="none" stroke="#FFFDF7" stroke-opacity="0.35" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="-90" y="-70" width="180" height="140" rx="4"/>
+    <circle cx="-40" cy="-30" r="16"/>
+    <path d="M -90 40 L -20 -10 L 30 30 L 70 -10 L 90 10"/>
+  </g>
+  <text x="200" y="475" text-anchor="middle" font-family="Georgia, serif" font-size="22" fill="#FFFDF7" fill-opacity="0.4" letter-spacing="2">NO COVER YET</text>
+</svg>

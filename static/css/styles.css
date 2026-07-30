@@ -1,0 +1,578 @@
+/* ==========================================================================
+   Fonts — self-hosted, per docs/design.md
+   ========================================================================== */
+@font-face {
+  font-family: "Bangers";
+  src: url("../fonts/Bangers-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../fonts/Poppins-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../fonts/Poppins-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ==========================================================================
+   Tokens
+   ========================================================================== */
+:root {
+  /* 60/30/10 core palette — docs/design.md, verbatim */
+  --color-black: #252525;   /* 60% background */
+  --color-white: #FFFDF7;   /* 30% foreground/text */
+  --color-red:   #D52C16;   /* 10% accent */
+
+  /* derived neutrals — elevation/borders only, never a 4th "surface" color */
+  --color-black-raised: #2f2f2f;
+  --color-black-inset: #1c1c1c;
+  --color-white-muted: rgba(255, 253, 247, 0.62);
+  --color-white-faint: rgba(255, 253, 247, 0.14);
+  --color-red-wash: rgba(213, 44, 22, 0.14);
+
+  /* the signature device: hard, un-blurred "spot color" offset shadow —
+     reads as a mis-registered second print plate, not a soft drop shadow */
+  --ink-shadow: 6px 6px 0 var(--color-red);
+  --ink-shadow-sm: 4px 4px 0 var(--color-red);
+  --ink-shadow-lg: 9px 9px 0 var(--color-red);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+
+  --panel-border: 3px solid var(--color-white);
+  --max-width: 1200px;
+}
+
+/* ==========================================================================
+   Reset / base
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--color-black);
+  color: var(--color-white);
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+ul { list-style: none; margin: 0; padding: 0; }
+button { font: inherit; }
+
+h1, h2, h3, .display {
+  font-family: "Bangers", cursive;
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  margin: 0 0 var(--space-3);
+}
+h1 { font-size: clamp(2.75rem, 6vw, 4rem); }
+h2 { font-size: clamp(2rem, 4vw, 2.5rem); }
+h3 { font-size: 1.5rem; }
+p { margin: 0 0 var(--space-4); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--color-red);
+  color: var(--color-white);
+  padding: var(--space-2) var(--space-4);
+  z-index: 100;
+}
+.skip-link:focus {
+  left: var(--space-3);
+  top: var(--space-3);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-red);
+  outline-offset: 2px;
+}
+
+.site-main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-5) var(--space-8);
+}
+
+/* ==========================================================================
+   Nav
+   ========================================================================== */
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border-bottom: var(--panel-border);
+  flex-wrap: wrap;
+}
+.site-nav__logo {
+  font-family: "Bangers", cursive;
+  font-size: 1.75rem;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  color: var(--color-white);
+}
+.site-nav__logo span { color: var(--color-red); }
+.site-nav__links {
+  display: flex;
+  gap: var(--space-6);
+}
+.site-nav__links a {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-decoration: none;
+  color: var(--color-white);
+  position: relative;
+  padding-bottom: var(--space-2);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.site-nav__links a::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 100%; bottom: 0;
+  height: 3px;
+  background: var(--color-red);
+  transition: right 0.15s ease-out;
+}
+.site-nav__links a:hover::after {
+  right: 0;
+}
+.site-nav__links a.is-active {
+  color: var(--color-red);
+}
+.site-nav__links a.is-active::after {
+  right: 0;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.site-footer {
+  border-top: var(--panel-border);
+  padding: var(--space-6) var(--space-5);
+  text-align: center;
+  color: var(--color-white-muted);
+}
+.site-footer__brand {
+  font-family: "Bangers", cursive;
+  font-size: 1.4rem;
+  color: var(--color-white);
+  margin-bottom: var(--space-2);
+}
+.site-footer__brand span { color: var(--color-red); }
+.site-footer__note {
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+.btn {
+  display: inline-block;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.95rem;
+  text-decoration: none;
+  padding: var(--space-3) var(--space-6);
+  border: var(--panel-border);
+  background: var(--color-red);
+  color: var(--color-white);
+  box-shadow: var(--ink-shadow);
+  transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
+}
+.btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--ink-shadow-lg);
+}
+.btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0 var(--color-red);
+}
+.btn--ghost {
+  background: transparent;
+  color: var(--color-white);
+  box-shadow: none;
+}
+.btn--ghost:hover {
+  box-shadow: var(--ink-shadow-sm);
+}
+
+/* ==========================================================================
+   Hero (index.html)
+   ========================================================================== */
+.hero {
+  position: relative;
+  padding: var(--space-8) var(--space-5);
+  margin-bottom: var(--space-8);
+  border: var(--panel-border);
+  background-color: var(--color-black-raised);
+  background-image: radial-gradient(var(--color-red-wash) 1.4px, transparent 1.4px);
+  background-size: 16px 16px;
+  text-align: center;
+  overflow: hidden;
+}
+.hero__eyebrow {
+  display: inline-block;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.8rem;
+  color: var(--color-red);
+  margin-bottom: var(--space-3);
+}
+.hero h1 {
+  text-shadow: var(--ink-shadow-lg);
+  margin-bottom: var(--space-4);
+}
+.hero p {
+  max-width: 42ch;
+  margin-inline: auto;
+  color: var(--color-white-muted);
+  font-size: 1.05rem;
+}
+.hero__actions {
+  margin-top: var(--space-6);
+}
+
+.section-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+  flex-wrap: wrap;
+}
+.section-heading h2 { margin: 0; }
+.section-heading a {
+  font-weight: 500;
+  color: var(--color-red);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.section-heading a:hover { text-decoration: underline; }
+
+/* ==========================================================================
+   Card grid + anime card
+   ========================================================================== */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: var(--space-6) var(--space-5);
+}
+
+.anime-card__link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.anime-card__poster-wrap {
+  position: relative;
+  border: var(--panel-border);
+  box-shadow: var(--ink-shadow);
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  background: var(--color-black-raised);
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+}
+.anime-card__poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.anime-card__link:hover .anime-card__poster-wrap {
+  transform: translate(-3px, -3px);
+  box-shadow: var(--ink-shadow-lg);
+}
+.anime-card__title {
+  font-size: 1.25rem;
+  margin: var(--space-3) 0 var(--space-1);
+}
+.anime-card__genres {
+  font-size: 0.8rem;
+  color: var(--color-white-muted);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.rating-burst {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 3.1rem;
+  height: 3.1rem;
+  background: var(--color-red);
+  color: var(--color-white);
+  font-family: "Bangers", cursive;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-9deg);
+  clip-path: polygon(100% 50%, 77.7% 66%, 75% 93.3%, 50% 82%, 25% 93.3%, 22.3% 66%,
+                      0% 50%, 22.3% 34%, 25% 6.7%, 50% 18%, 75% 6.7%, 77.7% 34%);
+}
+
+/* ==========================================================================
+   Star rating (reviews)
+   ========================================================================== */
+.stars {
+  display: inline-flex;
+  gap: 2px;
+  font-size: 1.1rem;
+}
+.star {
+  position: relative;
+  color: var(--color-white-faint);
+}
+.star::before {
+  content: "\2605";
+  position: absolute;
+  inset: 0;
+  width: var(--fill, 0%);
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--color-red);
+}
+
+/* ==========================================================================
+   Tag chips
+   ========================================================================== */
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: var(--space-4) 0;
+}
+.tag-chip {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: var(--space-2) var(--space-3);
+  border: 2px solid var(--color-red);
+  color: var(--color-red);
+  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+}
+
+/* ==========================================================================
+   A-Z strip
+   ========================================================================== */
+.az-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  margin-bottom: var(--space-7);
+  border: var(--panel-border);
+  background: var(--color-black-raised);
+}
+.az-strip a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  text-decoration: none;
+  color: var(--color-white);
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+.az-strip a:hover {
+  background: var(--color-red);
+  color: var(--color-white);
+}
+
+.letter-heading {
+  font-size: 1.5rem;
+  color: var(--color-red);
+  border-bottom: 2px solid var(--color-white-faint);
+  padding-bottom: var(--space-2);
+  margin: var(--space-7) 0 var(--space-5);
+  scroll-margin-top: var(--space-5);
+}
+.letter-heading:first-of-type { margin-top: 0; }
+
+/* ==========================================================================
+   Browse layout (grid + sidebar)
+   ========================================================================== */
+.browse-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+}
+@media (min-width: 900px) {
+  .browse-layout {
+    grid-template-columns: minmax(0, 1fr) 280px;
+    align-items: start;
+  }
+}
+
+.top-rated {
+  border: var(--panel-border);
+  background: var(--color-black-raised);
+  padding: var(--space-5);
+}
+.top-rated h2 {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-4);
+}
+.top-rated__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px solid var(--color-white-faint);
+}
+.top-rated__item:last-child { border-bottom: none; }
+.top-rated__rank {
+  font-family: "Bangers", cursive;
+  font-size: 1.3rem;
+  color: var(--color-red);
+  width: 1.6rem;
+  flex-shrink: 0;
+}
+.top-rated__title {
+  font-size: 0.9rem;
+  line-height: 1.3;
+}
+
+/* ==========================================================================
+   Anime detail page
+   ========================================================================== */
+.anime-hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  margin-bottom: var(--space-7);
+}
+@media (min-width: 700px) {
+  .anime-hero {
+    grid-template-columns: 260px 1fr;
+  }
+}
+.anime-hero__poster-wrap {
+  position: relative;
+  border: var(--panel-border);
+  box-shadow: var(--ink-shadow);
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  background: var(--color-black-raised);
+  max-width: 260px;
+}
+.anime-hero__poster { width: 100%; height: 100%; object-fit: cover; }
+.anime-hero__meta .stars { font-size: 1.4rem; margin-bottom: var(--space-3); }
+.anime-hero__synopsis {
+  color: var(--color-white-muted);
+  max-width: 65ch;
+}
+
+.gallery-tabs {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+.gallery-tab {
+  border: 2px solid var(--color-white-faint);
+  background: transparent;
+  color: var(--color-white-muted);
+  padding: var(--space-2) var(--space-4);
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+}
+.gallery-tab:hover { border-color: var(--color-red); color: var(--color-white); }
+.gallery-tab.is-active {
+  border-color: var(--color-red);
+  background: var(--color-red);
+  color: var(--color-white);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-5);
+  margin-bottom: var(--space-8);
+}
+.gallery-item {
+  border: var(--panel-border);
+  box-shadow: var(--ink-shadow-sm);
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+}
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+.gallery-item.is-hidden { display: none; }
+
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+.review {
+  border-left: 3px solid var(--color-red);
+  padding: var(--space-2) 0 var(--space-2) var(--space-4);
+}
+.review__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+  flex-wrap: wrap;
+}
+.review__author {
+  font-weight: 500;
+}
+.review__text {
+  color: var(--color-white-muted);
+  margin: 0;
+}
+
+.empty-state {
+  border: var(--panel-border);
+  background: var(--color-black-raised);
+  padding: var(--space-6);
+  text-align: center;
+  color: var(--color-white-muted);
+}
+
+/* ==========================================================================
+   404
+   ========================================================================== */
+.error-page {
+  text-align: center;
+  padding: var(--space-8) 0;
+}
+.error-page h1 { font-size: clamp(3rem, 10vw, 6rem); text-shadow: var(--ink-shadow-lg); }

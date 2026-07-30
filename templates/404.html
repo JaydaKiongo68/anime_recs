@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Page not found — AnimeRecs{% endblock %}
+
+{% block content %}
+<section class="error-page">
+  <h1>404</h1>
+  <p>That page got isekai'd into another dimension. Let's get you back.</p>
+  <a class="btn" href="{{ url_for('home') }}">Back to home</a>
+</section>
+{% endblock %}

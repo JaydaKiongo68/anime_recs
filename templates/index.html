@@ -1,11 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1> Hello World! </h1>
-</body>
-</html>
+{% extends "base.html" %}
+{% from "_macros.html" import anime_card %}
+
+{% block title %}AnimeRecs — Find Your Next Watch{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <span class="hero__eyebrow">Reviews from real watchers</span>
+  <h1>Stories worth the hype.</h1>
+  <p>Honest ratings and reviews for the anime actually worth your evening — no algorithms, just people who watched the whole thing.</p>
+  <div class="hero__actions">
+    <a class="btn" href="{{ url_for('browse') }}">Browse all anime</a>
+  </div>
+</section>
+
+<section>
+  <div class="section-heading">
+    <h2>Featured this week</h2>
+    <a href="{{ url_for('browse') }}">See everything &rarr;</a>
+  </div>
+  <div class="card-grid">
+    {% for entry in featured %}
+      {{ anime_card(entry) }}
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="No concept art available">
+  <defs>
+    <pattern id="dots-c" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(20)">
+      <circle cx="2" cy="2" r="1.5" fill="#D52C16" opacity="0.16"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="450" fill="#2f2f2f"/>
+  <rect width="800" height="450" fill="url(#dots-c)"/>
+  <g transform="translate(400,225)" fill="none" stroke="#FFFDF7" stroke-opacity="0.35" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M -60 40 L 40 -60 L 65 -35 L -35 65 Z"/>
+    <path d="M 40 -60 L 60 -80 L 85 -55 L 65 -35 Z" fill="#FFFDF7" fill-opacity="0.35" stroke="none"/>
+    <line x1="-70" y1="55" x2="-45" y2="80"/>
+  </g>
+  <text x="400" y="345" text-anchor="middle" font-family="Georgia, serif" font-size="20" fill="#FFFDF7" fill-opacity="0.4" letter-spacing="2">CONCEPT ART COMING SOON</text>
+</svg>

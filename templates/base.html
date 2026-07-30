@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}AnimeRecs{% endblock %}</title>
+  <meta name="description" content="Reviews and ratings for anime worth your time.">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-nav">
+    <a class="site-nav__logo" href="{{ url_for('home') }}">Anime<span>Recs</span></a>
+    <nav class="site-nav__links" aria-label="Primary">
+      <a href="{{ url_for('home') }}" class="{{ 'is-active' if request.endpoint == 'home' else '' }}">Home</a>
+      <a href="{{ url_for('browse') }}" class="{{ 'is-active' if request.endpoint == 'browse' else '' }}">Browse</a>
+    </nav>
+  </header>
+
+  <main id="main" class="site-main">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <p class="site-footer__brand">Anime<span>Recs</span></p>
+    <p class="site-footer__note">Fan-made reviews. Not affiliated with any studio or publisher.</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

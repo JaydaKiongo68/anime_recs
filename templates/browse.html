@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% from "_macros.html" import anime_card %}
+
+{% block title %}Browse — AnimeRecs{% endblock %}
+
+{% block content %}
+<div class="section-heading">
+  <h1 class="display">Browse all anime</h1>
+</div>
+
+{% if letter_groups %}
+<nav class="az-strip" aria-label="Jump to letter">
+  {% for group in letter_groups %}
+    <a href="#letter-{{ group.letter }}">{{ group.letter }}</a>
+  {% endfor %}
+</nav>
+
+<div class="browse-layout">
+  <div>
+    {% for group in letter_groups %}
+      <h2 id="letter-{{ group.letter }}" class="letter-heading">{{ group.letter }}</h2>
+      <div class="card-grid">
+        {% for entry in group.entries %}
+          {{ anime_card(entry) }}
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+
+  <aside class="top-rated">
+    <h2>Top rated</h2>
+    {% for entry in top_rated %}
+      <a class="top-rated__item" href="{{ url_for('anime_detail', anime_id=entry.anime.id) }}">
+        <span class="top-rated__rank">{{ loop.index }}</span>
+        <span class="top-rated__title">{{ entry.anime.title }}</span>
+      </a>
+    {% endfor %}
+  </aside>
+</div>
+{% else %}
+  <p class="empty-state">No anime here yet — check back soon.</p>
+{% endif %}
+{% endblock %}
