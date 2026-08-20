@@ -1,6 +1,6 @@
 # Anime Review Site — Sitemap
 
-Backend: Flask. Data still lives in a single Python file (no database yet) — Flask routes read from it and render Jinja2 templates.
+Backend: Flask. Anime data is fetched live from the AniList GraphQL API and cached in-memory + on disk (`anilist_cache.json`, 24h TTL); `data.py` exposes the same `ANIME_LIST` / `get_anime_by_id` / `get_average_rating` interface either way, and Flask routes read from it and render Jinja2 templates.
 
 ## Routes / Pages
 
@@ -22,7 +22,6 @@ Backend: Flask. Data still lives in a single Python file (no database yet) — F
   - Title + cover image
   - Synopsis
   - Genre tags
-  - Image gallery (screenshots, concept art)
   - Reviews list (reviewer name, star rating, review text)
 - Renders `templates/anime.html`
 
@@ -53,7 +52,6 @@ anime-review-site/
 - Cover image
 - Synopsis
 - Genre(s)
-- Gallery images (screenshots, concept art)
 - Reviews (reviewer name, star rating, review text)
 
 ## Notes

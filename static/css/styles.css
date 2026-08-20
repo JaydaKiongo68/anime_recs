@@ -286,7 +286,7 @@ p { margin: 0 0 var(--space-4); }
    ========================================================================== */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(190px, 240px));
   gap: var(--space-6) var(--space-5);
 }
 
@@ -523,7 +523,7 @@ p { margin: 0 0 var(--space-4); }
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 320px));
   gap: var(--space-5);
   margin-bottom: var(--space-8);
 }

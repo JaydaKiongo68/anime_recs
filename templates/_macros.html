@@ -14,7 +14,7 @@
 <article class="anime-card">
   <a class="anime-card__link" href="{{ url_for('anime_detail', anime_id=anime.id) }}">
     <div class="anime-card__poster-wrap">
-      <img class="anime-card__poster" src="{{ url_for('static', filename=anime.cover) }}" alt="{{ anime.title }} cover art" loading="lazy">
+      <img class="anime-card__poster" src="{{ anime.cover }}" alt="{{ anime.title }} cover art" loading="lazy">
       <span class="rating-burst" aria-hidden="true">{{ '%.1f'|format(avg_rating) }}</span>
     </div>
     <h3 class="anime-card__title">{{ anime.title }}</h3>

@@ -4,3 +4,4 @@ ENV/
 env/
 *.pyc
 __pycache__/
+anilist_cache.json

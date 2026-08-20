@@ -7,7 +7,7 @@
 <article>
   <div class="anime-hero">
     <div class="anime-hero__poster-wrap">
-      <img class="anime-hero__poster" src="{{ url_for('static', filename=anime.cover) }}" alt="{{ anime.title }} cover art">
+      <img class="anime-hero__poster" src="{{ anime.cover }}" alt="{{ anime.title }} cover art">
     </div>
     <div class="anime-hero__meta">
       <h1>{{ anime.title }}</h1>
@@ -20,26 +20,6 @@
       <p class="anime-hero__synopsis">{{ anime.synopsis }}</p>
     </div>
   </div>
-
-  {% if anime.gallery %}
-  <section>
-    <div class="section-heading">
-      <h2>Gallery</h2>
-    </div>
-    <div class="gallery-tabs" role="tablist" aria-label="Filter gallery">
-      <button type="button" class="gallery-tab is-active" data-filter="all">All</button>
-      <button type="button" class="gallery-tab" data-filter="screenshot">Screenshots</button>
-      <button type="button" class="gallery-tab" data-filter="concept-art">Concept Art</button>
-    </div>
-    <div class="gallery-grid">
-      {% for item in anime.gallery %}
-        <div class="gallery-item" data-type="{{ item.type }}">
-          <img src="{{ url_for('static', filename=item.path) }}" alt="{{ anime.title }} {{ item.type.replace('-', ' ') }}">
-        </div>
-      {% endfor %}
-    </div>
-  </section>
-  {% endif %}
 
   <section>
     <div class="section-heading">
